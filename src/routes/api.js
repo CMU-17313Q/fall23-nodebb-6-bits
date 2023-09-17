@@ -54,4 +54,19 @@ module.exports = function (app, middleware, controllers) {
         middleware.canViewUsers,
         middleware.checkAccountPermissions,
     ], helpers.tryRoute(controllers.accounts.edit.uploadPicture));
+    
+    // New API endpoint to retrieve posts by groupname
+    router.get('/posts/:groupname', [...middlewares, checkGroupMembership], async (req, res) => {
+        try {
+            const { groupname } = req.params;
+
+            // Fetch posts associated with the specified group
+            const posts = await fetchPostsByGroup(groupname);
+
+            return res.json(posts);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+    });
 };

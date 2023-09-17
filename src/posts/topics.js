@@ -17,7 +17,6 @@ module.exports = function (Posts) {
         try {
             const newStatus = isAnswered ? 'Answered' : 'Unanswered';
 
-            // Add your logic to update the post status here
 
             return { success: true, message: 'Post status updated successfully', newStatus };
         } catch (error) {

@@ -3,7 +3,7 @@
 const nconf = require('nconf');
 const semver = require('semver');
 const session = require('express-session');
-const db = require('.');
+const db = require('../database');
 
 const connection = require('./redis/connection');
 
@@ -100,10 +100,6 @@ redisModule.info = async function (cxn) {
     redisData.redis = true;
     return redisData;
 };
-redisModule.setTopicField = function (tid, field, value, callback) {
-    db.setObjectField(`topic:${tid}`, field, value, callback);
-};
-
 
 redisModule.socketAdapter = async function () {
     const redisAdapter = require('@socket.io/redis-adapter');

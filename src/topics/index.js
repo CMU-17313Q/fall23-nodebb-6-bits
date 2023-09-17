@@ -40,18 +40,6 @@ Topics.exists = async function (tids) {
         Array.isArray(tids) ? tids.map(tid => `topic:${tid}`) : `topic:${tids}`
     );
 };
-// Added event listener for 'markAsAnswered'
-Topics.socketTopics = {};
-Topics.socketTopics.markAsAnswered = async function (socket, data, callback) {
-    try {
-        // Update the Redis database
-        await Topics.setTopicField(data.tid, 'isAnswered', data.isAnswered);
-        callback(null);
-    } catch (err) {
-        callback(err);
-    }
-};
-
 
 Topics.getTopicsFromSet = async function (set, uid, start, stop) {
     const tids = await db.getSortedSetRevRange(set, start, stop);

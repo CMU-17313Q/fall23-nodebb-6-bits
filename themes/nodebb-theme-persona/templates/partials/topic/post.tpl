@@ -81,11 +81,13 @@
         <span class="post-tools">
             <a component="post/reply" href="#" class="no-select <!-- IF !privileges.topics:reply -->hidden<!-- ENDIF !privileges.topics:reply -->">[[topic:reply]]</a>
             <a component="post/quote" href="#" class="no-select <!-- IF !privileges.topics:reply -->hidden<!-- ENDIF !privileges.topics:reply -->">[[topic:quote]]</a>
-            <!-- IF topic.isAnswered -->
-                <button id="markAsAnswered">Mark as Unanswered</button>
-            <!-- ELSE -->
-                <button id="markAsAnswered">Mark as Answered</button>
-            <!-- ENDIF topic.isAnswered -->
+           <!-- IF !posts.toPid -->
+                <!-- IF topic.isAnswered -->
+                    <button id="markAsAnswered">Mark as Unanswered</button>
+                <!-- ELSE -->
+                    <button id="markAsAnswered">Mark as Answered</button>
+                <!-- ENDIF topic.isAnswered -->
+            <!-- ENDIF !posts.toPid -->
         </span>
 
         <!-- IF !reputation:disabled -->

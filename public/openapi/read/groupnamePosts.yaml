@@ -1,0 +1,21 @@
+get:
+  summary: "Retrieve posts by groupname"
+  description: "Description for this endpoint"
+  parameters:
+    - name: groupname
+      in: path
+      description: "Name of the group to retrieve posts for"
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Post'
+    '404':
+      description: "Group not found"

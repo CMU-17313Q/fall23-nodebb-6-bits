@@ -210,24 +210,7 @@ define('forum/topic', [
             Topic.applyDropup.call(element.get(0).parentNode);
         });
     }
-    $(document).ready(function () {
-        $('#markAsAnswered').on('click', function () {
-            var $this = $(this);
-            var isAnswered = $this.text() === 'Mark as Answered';
 
-            // Toggle button text
-            $this.text(isAnswered ? 'Mark as Unanswered' : 'Mark as Answered');
-
-            // Send AJAX request to server to update the status
-            $.ajax({
-                url: '/path/to/server/endpoint', // This should be the endpoint you create on the server-side
-                type: 'POST',
-                data: {
-                    isAnswered: !isAnswered,
-                },
-            });
-        });
-    });
     function addRepliesHandler() {
         $('[component="topic"]').on('click', '[component="post/reply-count"]', function () {
             const btn = $(this);

@@ -11,14 +11,21 @@ module.exports = function (Posts) {
         const posts = await Posts.getPostsByPids(pids, uid);
         return await user.blocks.filter(uid, posts);
     };
+
+
     Posts.updatePostStatus = async function (isAnswered) {
         try {
             const newStatus = isAnswered ? 'Answered' : 'Unanswered';
+
+            // Add your logic to update the post status here
+
             return { success: true, message: 'Post status updated successfully', newStatus };
         } catch (error) {
             return { success: false, message: 'Failed to update post status' };
         }
     };
+
+
     Posts.isMain = async function (pids) {
         const isArray = Array.isArray(pids);
         pids = isArray ? pids : [pids];

@@ -14,6 +14,7 @@
                     <!-- IF groups.truncated -->
                     <li class="truncated"><i class="fa fa-ellipsis-h"></i></li>
                     <!-- ENDIF groups.truncated -->
+                
                 </ul>
             </div>
         </div>

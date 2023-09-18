@@ -13,16 +13,16 @@ module.exports = function (Posts) {
     };
 
 
-    Posts.updatePostStatus = async function (isAnswered) {
-        try {
-            const newStatus = isAnswered ? 'Answered' : 'Unanswered';
+    // Posts.updatePostStatus = async function (isAnswered) {
+    //     try {
+    //         const newStatus = isAnswered ? 'Answered' : 'Unanswered';
 
 
-            return { success: true, message: 'Post status updated successfully', newStatus };
-        } catch (error) {
-            return { success: false, message: 'Failed to update post status' };
-        }
-    };
+    //         return { success: true, message: 'Post status updated successfully', newStatus };
+    //     } catch (error) {
+    //         return { success: false, message: 'Failed to update post status' };
+    //     }
+    // };
 
 
     Posts.isMain = async function (pids) {

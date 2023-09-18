@@ -220,7 +220,7 @@ define('forum/topic', [
 
             // Send AJAX request to server to update the status
             $.ajax({
-                url: '/path/to/server/endpoint', // This should be the endpoint you create on the server-side
+                url: '/update-answer-status', // This should be the endpoint you create on the server-side
                 type: 'POST',
                 data: {
                     isAnswered: !isAnswered,

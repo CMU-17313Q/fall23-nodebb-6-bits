@@ -36,7 +36,7 @@ module.exports = function (Topics) {
             isAnswered: false,
         };
 
-        // const firstTopicData = topics[0]; 
+        // const firstTopicData = topics[0];
         // firstTopicData.isAnswered = false;
 
 

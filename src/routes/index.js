@@ -58,8 +58,8 @@ _mounts.globalMod = (app, middleware, controllers) => {
 _mounts.topic = (app, name, middleware, controllers) => {
     setupPageRoute(app, `/${name}/:topic_id/:slug/:post_index?`, [], controllers.topics.get);
     setupPageRoute(app, `/${name}/:topic_id/:slug?`, [], controllers.topics.get);
-    // Create a route for updating the answer status    
-     //app.post('/update-answer-status', middleware, app.updateAnswerStatus);
+    // Create a route for updating the answer status
+    // app.post('/update-answer-status', middleware, app.updateAnswerStatus);
 };
 
 _mounts.post = (app, name, middleware, controllers) => {

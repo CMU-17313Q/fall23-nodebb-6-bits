@@ -36,7 +36,8 @@ module.exports = function (Topics) {
             isAnswered: false,
         };
 
-
+        const firstTopicData = topics[0]; 
+        firstTopicData.isAnswered = false;
 
 
         if (Array.isArray(data.tags) && data.tags.length) {

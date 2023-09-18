@@ -35,10 +35,6 @@ module.exports = function (Topics) {
             viewcount: 0,
             isAnswered: false,
         };
-
-
-
-
         if (Array.isArray(data.tags) && data.tags.length) {
             topicData.tags = data.tags.join(',');
         }

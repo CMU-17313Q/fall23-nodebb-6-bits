@@ -13,6 +13,7 @@ const helpers = require('./helpers');
 const pagination = require('../pagination');
 const utils = require('../utils');
 const analytics = require('../analytics');
+const db = require('../database');
 
 const topicsController = module.exports;
 
@@ -159,6 +160,7 @@ async function incrementViewCount(req, tid) {
         }
     }
 }
+
 
 async function markAsRead(req, tid) {
     if (req.loggedIn) {
@@ -340,6 +342,20 @@ topicsController.teaser = async function (req, res, next) {
     res.json(postData[0]);
 };
 
+topicsController.setisAnswered = async (req, res) => {
+    try {
+        const { tid } = req.params;
+
+
+        await db.setObjectField(`topic:${tid}`, 'isAnswered', true);
+        const topicData = await topicsController.get(req, req.params);
+        helpers.formatApiResponse(200, res, topicData);
+    } catch (error) {
+        // Handle error appropriately
+        helpers.formatApiResponse(500, res, { error: 'An error occurred while setting the topic as answered.' });
+    }
+};
+
 topicsController.pagination = async function (req, res, next) {
     const tid = req.params.topic_id;
     const currentPage = parseInt(req.query.page, 10) || 1;
@@ -361,6 +377,8 @@ topicsController.pagination = async function (req, res, next) {
     if (!userPrivileges.read || !privileges.topics.canViewDeletedScheduled(topic, userPrivileges)) {
         return helpers.notAllowed(req, res);
     }
+
+
 
     const postCount = topic.postcount;
     const pageCount = Math.max(1, Math.ceil(postCount / settings.postsPerPage));

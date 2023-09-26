@@ -101,6 +101,17 @@ describe('Topic\'s', () => {
             });
         });
 
+
+        it('should reach to the new field cretaed in for topic wehter they are answered or not', (done) => {
+            topics.getTopicFields(newTopic.tid, ['isAnswered'], (err, data) => {
+                assert.ifError(err);
+                assert(Object.keys(data).length === 1);
+                assert(data.hasOwnProperty('isAnswered'));
+                done();
+            });
+        });
+
+
         it('should fail to create new topic with empty title', (done) => {
             topics.post({ uid: topic.userId, title: '', content: topic.content, cid: topic.categoryId }, (err) => {
                 assert.ok(err);

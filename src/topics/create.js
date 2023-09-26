@@ -41,6 +41,7 @@ module.exports = function (Topics) {
 
         const result = await plugins.hooks.fire('filter:topic.create', { topic: topicData, data: data });
         topicData = result.topic;
+        topicData.isAnswered = data.isAnswered || false;
         await db.setObject(`topic:${topicData.tid}`, topicData);
 
         const timestampedSortedSetKeys = [

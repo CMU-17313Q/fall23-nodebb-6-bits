@@ -345,13 +345,10 @@ topicsController.teaser = async function (req, res, next) {
 topicsController.setisAnswered = async (req, res) => {
     try {
         const { tid } = req.params;
-
-
         await db.setObjectField(`topic:${tid}`, 'isAnswered', true);
         const topicData = await topicsController.get(req, req.params);
         helpers.formatApiResponse(200, res, topicData);
     } catch (error) {
-        // Handle error appropriately
         helpers.formatApiResponse(500, res, { error: 'An error occurred while setting the topic as answered.' });
     }
 };

@@ -3,7 +3,6 @@
 const nconf = require('nconf');
 const semver = require('semver');
 const session = require('express-session');
-const db = require('../database');
 
 const connection = require('./redis/connection');
 

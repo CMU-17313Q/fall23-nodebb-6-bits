@@ -294,9 +294,6 @@ describe('Topic\'s', () => {
             });
         });
 
-
-
-
         it('should reach to the new field cretaed in for topic wehter they are answered or not', (done) => {
             topics.getTopicFields(newTopic.tid, ['isAnswered'], (err, data) => {
                 assert.ifError(err);

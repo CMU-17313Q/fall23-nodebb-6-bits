@@ -1,3 +1,5 @@
+'use strict';
+
 function setAnonymous(topic) {
     if (topic.isAnonymous === 'true') {
         topic.user = {

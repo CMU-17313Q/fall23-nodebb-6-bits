@@ -1,5 +1,6 @@
 "use strict";
 // plugins.d.ts
+const { setAnonymous } = require('./isanonfunc.js');
 const db = require('../database');
 const topics = require('../topics');
 const plugins = require('../plugins');
@@ -176,6 +177,9 @@ module.exports = function (Categories) {
                 topic.teaser = null;
                 topic.noAnchor = true;
                 topic.tags = [];
+            }
+            if (topic.isAnonymous === 'true') {
+                setAnonymous(topic); // call the setAnonymous function here
             }
         });
     };

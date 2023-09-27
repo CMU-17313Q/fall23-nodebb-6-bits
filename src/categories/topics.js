@@ -1,6 +1,7 @@
 "use strict";
 // plugins.d.ts
-const { setAnonymous } = require('./isanonfunc.js');
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { setAnonymous } = require('./isanonfunc');
 const db = require('../database');
 const topics = require('../topics');
 const plugins = require('../plugins');

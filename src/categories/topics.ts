@@ -2,7 +2,8 @@
 
 declare function require(name: string);
 // plugins.d.ts
-const { setAnonymous } = require('./isanonfunc.js') as { setAnonymous: (topic: any) => void };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { setAnonymous } = require('./isanonfunc') as { setAnonymous: (topic: any) => void };
 const db = require('../database') as unknown as DB;
 const topics = require('../topics') as unknown as Topics;
 const plugins = require('../plugins') as unknown as Plugins;

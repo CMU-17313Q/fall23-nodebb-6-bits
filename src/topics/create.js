@@ -34,7 +34,7 @@ module.exports = function (Topics) {
             postcount: 0,
             viewcount: 0,
             isAnswered: false,
-            isAnonymous : data.isAnonymous,
+            isAnonymous: data.isAnonymous,
         };
         if (Array.isArray(data.tags) && data.tags.length) {
             topicData.tags = data.tags.join(',');

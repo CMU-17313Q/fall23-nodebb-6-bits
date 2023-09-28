@@ -360,8 +360,10 @@ module.exports = function (Topics) {
             replyPids.forEach((replyPid) => {
                 const replyData = pidMap[replyPid];
                 if (!uidsUsed[replyData.uid] && currentData.users.length < 6) {
-                    currentData.users.push(uidMap[replyData.uid]);
-                    uidsUsed[replyData.uid] = true;
+                    if (replyData.isAnonymous !== 'true') {
+                        currentData.users.push(uidMap[replyData.uid]);
+                        uidsUsed[replyData.uid] = true;
+                    }
                 }
             });
 

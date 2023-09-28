@@ -145,6 +145,14 @@ module.exports = function (Topics) {
                     postObj.user.username = validator.escape(String(postObj.handle));
                     postObj.user.displayname = postObj.user.username;
                 }
+                if (postObj.selfPost === false && postObj.isAnonymous === 'true') {
+                    postObj.user = {
+                        username: 'anon',
+                        displayname: 'anon',
+                        isAnonymous: postObj.isAnonymous,
+                    };
+                    postObj.uid = -1;
+                }
             }
         });
 

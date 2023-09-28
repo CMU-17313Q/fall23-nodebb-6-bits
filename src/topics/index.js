@@ -202,6 +202,14 @@ Topics.getTopicWithPosts = async function (topicData, set, uid, start, stop, rev
     topicData.bookmark = bookmark;
     topicData.postSharing = postSharing;
     topicData.deleter = deleter;
+    if (topicData.isAnonymous === 'true') {
+        topicData.user = {
+            username: 'anon',
+            displayname: 'anon',
+            isAnonymous: topicData.isAnonymous,
+        };
+        topicData.uid = -1;
+    }
     if (deleter) {
         topicData.deletedTimestampISO = utils.toISOString(topicData.deletedTimestamp);
     }

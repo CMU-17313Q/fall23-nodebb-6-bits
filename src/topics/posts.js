@@ -328,8 +328,7 @@ module.exports = function (Topics) {
         const arrayOfReplyPids = await db.getSortedSetsMembers(keys);
 
         const uniquePids = _.uniq(_.flatten(arrayOfReplyPids));
-
-        let replyData = await posts.getPostsFields(uniquePids, ['pid', 'uid', 'timestamp']);
+        let replyData = await posts.getPostsFields(uniquePids, ['pid', 'uid', 'isAnonymous', 'timestamp']);
         const result = await plugins.hooks.fire('filter:topics.getPostReplies', {
             uid: callerUid,
             replies: replyData,

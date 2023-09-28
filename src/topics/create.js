@@ -53,7 +53,10 @@ module.exports = function (Topics) {
         if (scheduled) {
             timestampedSortedSetKeys.push('topics:scheduled');
         }
-
+        /**
+         * @type {boolean}
+         */
+        topicData.isAnswered = data.isAnswered || false;
         await Promise.all([
             db.sortedSetsAdd(timestampedSortedSetKeys, timestamp, topicData.tid),
             db.sortedSetsAdd([

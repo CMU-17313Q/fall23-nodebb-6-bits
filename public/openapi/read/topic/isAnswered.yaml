@@ -1,0 +1,16 @@
+get:
+  summary: Checks if the topic is answered
+  parameters:
+    - name: topic_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: slug
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Successful response

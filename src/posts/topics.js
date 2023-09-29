@@ -44,10 +44,10 @@ module.exports = function (Posts) {
                 // Implement the logic here to handle the button functionality
                 // For example, you can update the "isAnswered" status of a post with the given pid
                 // You can also perform any necessary database operations here
-    
+
                 // Example: Update the post's "isAnswered" status
                 await Posts.updatePostField(pid, 'isAnswered', isAnswered);
-    
+
                 // Return a success response or any relevant data
                 return { success: true, message: 'Button functionality handled successfully' };
             } catch (error) {

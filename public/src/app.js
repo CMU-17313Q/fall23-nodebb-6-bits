@@ -324,7 +324,7 @@ if (document.readyState === 'loading') {
 
         require(['translator'], function (translator) {
             translator.translate('[[global:' + status + ']]', function (translated) {
-                el.removeClass('online offline dnd away')
+                el.removeClass('online offline dnd berightback away')
                     .addClass(status)
                     .attr('title', translated)
                     .attr('data-original-title', translated);

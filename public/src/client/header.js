@@ -27,7 +27,7 @@ define('forum/header', [
                     return alerts.error(err);
                 }
                 $('[data-uid="' + app.user.uid + '"] [component="user/status"], [component="header/profilelink"] [component="user/status"]')
-                    .removeClass('away online dnd offline')
+                    .removeClass('away online dnd berightback offline')
                     .addClass(status);
                 $('[component="header/usercontrol"] [data-status]').each(function () {
                     $(this).find('span').toggleClass('bold', $(this).attr('data-status') === status);

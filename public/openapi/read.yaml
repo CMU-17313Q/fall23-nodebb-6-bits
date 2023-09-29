@@ -330,5 +330,7 @@ paths:
     $ref: 'read/groups/slug.yaml'
   "/api/groups/{slug}/members":
     $ref: 'read/groups/slug/members.yaml'
+  "/api/topic/{topic_id}/{slug}/isAnswered":
+    $ref: 'read/topic/isAnswered.yaml'
   /api/outgoing:
     $ref: 'read/outgoing.yaml'

@@ -108,6 +108,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="#" class="user-status" data-status="berightback">
+                                    <i class="fa fa-fw fa-circle status berightback"></i><span <!-- IF user.berightback -->class="bold"<!-- ENDIF user.berightback -->> [[global:berightback]]</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="#" class="user-status" data-status="away">
                                     <i class="fa fa-fw fa-circle status away"></i><span <!-- IF user.away -->class="bold"<!-- ENDIF user.away -->> [[global:away]]</span>
                                 </a>

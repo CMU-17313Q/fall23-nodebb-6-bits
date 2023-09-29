@@ -90,6 +90,7 @@ define('forum/topic/postTools', [
 
         handleSelectionTooltip();
 
+
         postContainer.on('click', '[component="post/quote"]', function () {
             onQuoteClicked($(this), tid);
         });
@@ -97,6 +98,7 @@ define('forum/topic/postTools', [
         postContainer.on('click', '[component="post/reply"]', function () {
             onReplyClicked($(this), tid);
         });
+
 
         $('.topic').on('click', '[component="topic/reply"]', function (e) {
             e.preventDefault();

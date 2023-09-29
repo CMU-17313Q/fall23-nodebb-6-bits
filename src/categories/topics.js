@@ -1,5 +1,7 @@
 "use strict";
 // plugins.d.ts
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { setAnonymous } = require('./isanonfunc');
 const db = require('../database');
 const topics = require('../topics');
 const plugins = require('../plugins');
@@ -176,6 +178,9 @@ module.exports = function (Categories) {
                 topic.teaser = null;
                 topic.noAnchor = true;
                 topic.tags = [];
+            }
+            if (topic.isAnonymous === 'true') {
+                setAnonymous(topic); // call the setAnonymous function here
             }
         });
     };

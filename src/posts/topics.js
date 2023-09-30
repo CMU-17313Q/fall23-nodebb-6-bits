@@ -39,6 +39,24 @@ module.exports = function (Posts) {
             topics.getTopicsFields(tids, ['slug']),
         ]);
 
+        Posts.toggleButtonFunctionality = async function (pid, isAnswered) {
+            try {
+                // Implement the logic here to handle the button functionality
+                // For example, you can update the "isAnswered" status of a post with the given pid
+                // You can also perform any necessary database operations here
+
+                // Example: Update the post's "isAnswered" status
+                await Posts.updatePostField(pid, 'isAnswered', isAnswered);
+
+                // Return a success response or any relevant data
+                return { success: true, message: 'Button functionality handled successfully' };
+            } catch (error) {
+                // Handle errors if any
+                console.error('Error handling button functionality:', error);
+                throw new Error('Failed to handle button functionality');
+            }
+        };
+
         const paths = pids.map((pid, index) => {
             const slug = topicData[index] ? topicData[index].slug : null;
             const postIndex = utils.isNumber(indices[index]) ? parseInt(indices[index], 10) + 1 : null;

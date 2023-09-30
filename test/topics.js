@@ -101,6 +101,8 @@ describe('Topic\'s', () => {
             });
         });
 
+
+
         it('should fail to create new topic with empty title', (done) => {
             topics.post({ uid: topic.userId, title: '', content: topic.content, cid: topic.categoryId }, (err) => {
                 assert.ok(err);
@@ -304,6 +306,7 @@ describe('Topic\'s', () => {
                 done();
             });
         });
+
         it('should error if pid is not a number', (done) => {
             socketPosts.getReplies({ uid: 0 }, 'abc', (err) => {
                 assert.equal(err.message, '[[error:invalid-data]]');

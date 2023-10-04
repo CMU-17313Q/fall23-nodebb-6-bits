@@ -428,14 +428,14 @@ describe('post uploads management', () => {
             });
     
             ({ cid } = await categories.create({
-                name: 'Anonymous Category',
-                description: 'Category for anonymous topics',
+                name: 'Anonymous Post',
+                description: 'test for anonymous posts',
             }));
         });
     
-        it('should create anonymous topic successfully', done => {
-            // Assuming the initial topic data
-            const topic = {
+        it('should create anonymous post successfully', done => {
+            // Assuming the initial post data
+            const post = {
                 user: {
                     username: 'user1',
                     displayname: 'User One',
@@ -445,14 +445,14 @@ describe('post uploads management', () => {
             };
         
             // Printing topic before calling setAnonymous
-            console.log('Before:', topic);
+            console.log('Before:', post);
         
             // Call the setAnonymous function with the topic
-            setAnonymous(topic);
+            setAnonymous(post);
         
             // Printing topic after calling setAnonymous
-            console.log('After:', topic);
-        
+            console.log('After:', post);
+                
             // Assertions to check if the topic is set as anonymous
             assert.strictEqual(topic.user.username, 'anon', 'Username should be anon');
             assert.strictEqual(topic.user.displayname, 'anon', 'Display name should be anon');

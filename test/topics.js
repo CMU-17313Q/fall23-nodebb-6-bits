@@ -295,9 +295,6 @@ describe('Topic\'s', () => {
         });
 
 
-
-
-
         // it('should reach to the new field created in for topic whether they are answered or not', (done) => {
         //     topics.getTopicFields(newTopic.tid, ['isAnswered'], (err, data) => {
         //         assert.ifError(err);
@@ -1239,6 +1236,11 @@ describe('Topic\'s', () => {
                 topicData = result.topicData;
                 done();
             });
+        });
+
+        it('should check topic isAnswered is false', (done) => {
+            assert.equal(topicData.isAnswered, 'false');
+            done();
         });
 
         it('should load topic', (done) => {

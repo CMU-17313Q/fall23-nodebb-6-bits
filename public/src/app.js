@@ -322,7 +322,9 @@ if (document.readyState === 'loading') {
             return;
         }
 
+
         require(['translator'], function (translator) {
+            
             translator.translate('[[global:' + status + ']]', function (translated) {
                 el.removeClass('online offline dnd berightback away')
                     .addClass(status)

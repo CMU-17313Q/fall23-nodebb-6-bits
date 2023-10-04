@@ -42,7 +42,22 @@
                 <!-- IF !topics.noAnchor -->
                 <a href="{config.relative_path}/topic/{topics.slug}<!-- IF topics.bookmark -->/{topics.bookmark}<!-- ENDIF topics.bookmark -->">{topics.title}</a><br />
                 <!-- ELSE -->
-                <span>{topics.title}</span><br />
+                <span>{topics.title}
+                    <small>{topics.votes}</small>
+                    <!-- END -->
+                    <!-- IF !topics.toPid -->
+                    <!-- IF topics.isAnswered -->
+                        <p id="markAsAnsweredText">
+                        <small>Marked as Answered</small>
+                        </p>
+                    <!-- ELSE -->
+                        <p id="markAsAnsweredText">
+                        <small>Not Answered</small>
+                        </p>
+                    <!-- ENDIF -->
+                    <!-- ENDIF -->
+                </span><br />
+
                 <!-- ENDIF !topics.noAnchor -->
 
                 <!-- IF !template.category -->
@@ -73,6 +88,7 @@
 
         <div class="mobile-stat col-xs-2 visible-xs text-right">
             <span class="human-readable-number">{topics.postcount}</span> <a href="{config.relative_path}/topic/{topics.slug}/{topics.teaser.index}"><i class="fa fa-arrow-circle-right"></i></a>
+
         </div>
 
         <div class="col-md-1 hidden-sm hidden-xs stats stats-votes">

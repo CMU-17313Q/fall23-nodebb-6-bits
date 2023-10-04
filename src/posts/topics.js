@@ -12,20 +12,6 @@ module.exports = function (Posts) {
         return await user.blocks.filter(uid, posts);
     };
 
-
-    Posts.updatePostStatus = async function (isAnswered) {
-        try {
-            const newStatus = isAnswered ? 'Answered' : 'Unanswered';
-
-            // Add your logic to update the post status here
-
-            return { success: true, message: 'Post status updated successfully', newStatus };
-        } catch (error) {
-            return { success: false, message: 'Failed to update post status' };
-        }
-    };
-
-
     Posts.isMain = async function (pids) {
         const isArray = Array.isArray(pids);
         pids = isArray ? pids : [pids];
@@ -52,6 +38,24 @@ module.exports = function (Posts) {
             Posts.getPostIndices(postData, uid),
             topics.getTopicsFields(tids, ['slug']),
         ]);
+
+        Posts.toggleButtonFunctionality = async function (pid, isAnswered) {
+            try {
+                // Implement the logic here to handle the button functionality
+                // For example, you can update the "isAnswered" status of a post with the given pid
+                // You can also perform any necessary database operations here
+
+                // Example: Update the post's "isAnswered" status
+                await Posts.updatePostField(pid, 'isAnswered', isAnswered);
+
+                // Return a success response or any relevant data
+                return { success: true, message: 'Button functionality handled successfully' };
+            } catch (error) {
+                // Handle errors if any
+                console.error('Error handling button functionality:', error);
+                throw new Error('Failed to handle button functionality');
+            }
+        };
 
         const paths = pids.map((pid, index) => {
             const slug = topicData[index] ? topicData[index].slug : null;

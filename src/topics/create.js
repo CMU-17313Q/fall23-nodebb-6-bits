@@ -34,14 +34,15 @@ module.exports = function (Topics) {
             postcount: 0,
             viewcount: 0,
             isAnswered: false,
+            isAnonymous: data.isAnonymous,
         };
-
         if (Array.isArray(data.tags) && data.tags.length) {
             topicData.tags = data.tags.join(',');
         }
 
         const result = await plugins.hooks.fire('filter:topic.create', { topic: topicData, data: data });
         topicData = result.topic;
+        topicData.isAnswered = data.isAnswered || false;
         await db.setObject(`topic:${topicData.tid}`, topicData);
 
         const timestampedSortedSetKeys = [
@@ -54,7 +55,10 @@ module.exports = function (Topics) {
         if (scheduled) {
             timestampedSortedSetKeys.push('topics:scheduled');
         }
-
+        /**
+         * @type {boolean}
+         */
+        topicData.isAnswered = data.isAnswered || false;
         await Promise.all([
             db.sortedSetsAdd(timestampedSortedSetKeys, timestamp, topicData.tid),
             db.sortedSetsAdd([

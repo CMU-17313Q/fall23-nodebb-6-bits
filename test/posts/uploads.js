@@ -427,5 +427,37 @@ describe('post uploads management', () => {
                 gdpr_consent: 1,
             });
     
-        })});
+            ({ cid } = await categories.create({
+                name: 'Anonymous Category',
+                description: 'Category for anonymous topics',
+            }));
+        });
+    
+        it('should create anonymous topic successfully', done => {
+            // Assuming the initial topic data
+            const topic = {
+                user: {
+                    username: 'user1',
+                    displayname: 'User One',
+                },
+                uid: 123,
+                isAnonymous: 'true' // This should trigger the anonymity setting
+            };
+        
+            // Printing topic before calling setAnonymous
+            console.log('Before:', topic);
+        
+            // Call the setAnonymous function with the topic
+            setAnonymous(topic);
+        
+            // Printing topic after calling setAnonymous
+            console.log('After:', topic);
+        
+            // Assertions to check if the topic is set as anonymous
+            assert.strictEqual(topic.user.username, 'anon', 'Username should be anon');
+            assert.strictEqual(topic.user.displayname, 'anon', 'Display name should be anon');
+            assert.strictEqual(topic.uid, -1, 'UID should be -1');
+            done();
+        });
+    });
 });

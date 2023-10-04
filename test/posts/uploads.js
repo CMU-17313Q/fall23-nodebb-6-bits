@@ -415,25 +415,21 @@ describe('post uploads management', () => {
             done();
         });
     });
-    
     describe('Anonymous Posting', () => {
         let uid;
         let cid;
-    
         before(async () => {
             uid = await user.create({
                 username: 'anon_user',
                 password: 'securepassword',
                 gdpr_consent: 1,
             });
-    
             ({ cid } = await categories.create({
                 name: 'Anonymous Post',
                 description: 'test for anonymous posts',
             }));
         });
-    
-        it('should create anonymous post successfully', done => {
+        it('should create anonymous post successfully', (done) => {
             // Assuming the initial post data
             const post = {
                 user: {
@@ -441,18 +437,14 @@ describe('post uploads management', () => {
                     displayname: 'User One',
                 },
                 uid: 123,
-                isAnonymous: 'true' // This should trigger the anonymity setting
+                isAnonymous: 'true', // This should trigger the anonymity setting
             };
-        
             // Printing topic before calling setAnonymous
             console.log('Before:', post);
-        
             // Call the setAnonymous function with the topic
             setAnonymous(post);
-        
             // Printing topic after calling setAnonymous
             console.log('After:', post);
-                
             // Assertions to check if the topic is set as anonymous
             assert.strictEqual(post.user.username, 'anon', 'Username should be anon');
             assert.strictEqual(post.user.displayname, 'anon', 'Display name should be anon');

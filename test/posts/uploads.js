@@ -454,9 +454,9 @@ describe('post uploads management', () => {
             console.log('After:', post);
                 
             // Assertions to check if the topic is set as anonymous
-            assert.strictEqual(topic.user.username, 'anon', 'Username should be anon');
-            assert.strictEqual(topic.user.displayname, 'anon', 'Display name should be anon');
-            assert.strictEqual(topic.uid, -1, 'UID should be -1');
+            assert.strictEqual(post.user.username, 'anon', 'Username should be anon');
+            assert.strictEqual(post.user.displayname, 'anon', 'Display name should be anon');
+            assert.strictEqual(post.uid, -1, 'UID should be -1');
             done();
         });
     });

@@ -24,6 +24,7 @@ const _recreateFiles = () => {
     // Create stub files for testing
     _filenames.forEach(filename => fs.closeSync(fs.openSync(path.join(nconf.get('upload_path'), 'files', filename), 'w')));
 };
+const { setAnonymous } = require('../../src/categories/isanonfunc');
 
 describe('upload methods', () => {
     let pid;
@@ -414,4 +415,17 @@ describe('post uploads management', () => {
             done();
         });
     });
+    
+    describe('Anonymous Posting', () => {
+        let uid;
+        let cid;
+    
+        before(async () => {
+            uid = await user.create({
+                username: 'anon_user',
+                password: 'securepassword',
+                gdpr_consent: 1,
+            });
+    
+        })});
 });

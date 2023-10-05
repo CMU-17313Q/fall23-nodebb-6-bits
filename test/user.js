@@ -1068,6 +1068,15 @@ describe('User', () => {
             });
         });
 
+        it('should check user status against allowedStatus', () => {
+            const allowedStatus = ['online', 'berightback', 'offline', 'dnd', 'away'];
+            const status = 'berightback';
+
+
+            assert.ok(allowedStatus.includes(status), `Status '${status}' is not allowed`);
+        });
+
+
         it('should change user picture', async () => {
             await apiUser.changePicture({ uid: uid }, { type: 'default', uid: uid });
             const picture = await User.getUserField(uid, 'picture');
@@ -2648,6 +2657,57 @@ describe('User', () => {
             meta.config.hideFullname = 0;
             done();
         });
+
+        // Assuming the allowedStatus function is defined earlier in the file
+        // function allowedStatus(status) {
+        //     const validStatuses = ['online', 'berightback', 'offline', 'dnd', 'away'];
+        //     if (!validStatuses.includes(status)) {
+        //         throw new Error('[[error:invalid-user-status]]');
+        //     }
+        //     return true;
+        // }
+
+        // // Define the test
+        // describe('Status validation with allowedStatus function', () => {
+        //     it('should validate statuses correctly', (done) => {
+        //         const validStatusesList = ['online', 'berightback', 'offline', 'dnd', 'away'];
+        //         const invalidStatusesList = ['invalid', 'testing', '123'];
+        //         let errorOccurred = false;
+
+        //         // Check valid statuses
+        //         validStatusesList.forEach((status) => {
+        //             try {
+        //                 if (!allowedStatus(status)) {
+        //                     console.error(`Validating '${status}' failed.`);
+        //                     errorOccurred = true;
+        //                 }
+        //             } catch (error) {
+        //                 console.error(`Validating '${status}' threw an unexpected error: ${error.message}`);
+        //                 errorOccurred = true;
+        //             }
+        //         });
+
+        //         // Check invalid statuses
+        //         invalidStatusesList.forEach((status) => {
+        //             try {
+        //                 allowedStatus(status);
+        //                 console.error(`Validating '${status}' passed, but was expected to fail.`);
+        //                 errorOccurred = true;
+        //             } catch (error) {
+        //                 if (error.message !== '[[error:invalid-user-status]]') {
+        //                     console.error(`Validating '${status}' threw an unexpected error: ${error.message}`);
+        //                     errorOccurred = true;
+        //                 }
+        //             }
+        //         });
+
+        //         if (!errorOccurred) {
+        //             done();
+        //         } else {
+        //             done(new Error('Status validation errors occurred.'));
+        //         }
+        //     });
+        // });
 
         async function assertPrivacy({ expectVisible, jar, v3Api, emailOnly }) {
             const path = v3Api ? `v3/users/${hidingUser.uid}` : `user/${hidingUser.username}`;

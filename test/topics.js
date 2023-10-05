@@ -294,19 +294,6 @@ describe('Topic\'s', () => {
             });
         });
 
-
-
-
-
-        // it('should reach to the new field created in for topic whether they are answered or not', (done) => {
-        //     topics.getTopicFields(newTopic.tid, ['isAnswered'], (err, data) => {
-        //         assert.ifError(err);
-        //         assert(Object.keys(data).length === 1);
-        //         assert(data.hasOwnProperty('isAnswered'));
-        //         done();
-        //     });
-        // });
-
         it('should error if pid is not a number', (done) => {
             socketPosts.getReplies({ uid: 0 }, 'abc', (err) => {
                 assert.equal(err.message, '[[error:invalid-data]]');
@@ -410,6 +397,17 @@ describe('Topic\'s', () => {
                 done();
             });
         });
+
+        it('should reach to the new field created in for topic whether they are answered or not', (done) => {
+            topics.getTopicFields(newTopic.tid, ['isAnswered'], (err, data) => {
+                assert.ifError(err);
+                assert(Object.keys(data).length === 1);
+                assert(data.hasOwnProperty('isAnswered'));
+                done();
+            });
+        });
+
+
 
         it('should get topic title by pid', (done) => {
             topics.getTitleByPid(newPost.pid, (err, title) => {
@@ -1248,6 +1246,12 @@ describe('Topic\'s', () => {
                 assert(body);
                 done();
             });
+        });
+
+        it('should check topic isAnswered is false', (done) => {
+            const tmpIsAnswer = topicData.isAnswered === 'true' || topicData.isAnswered === true;
+            assert.equal(tmpIsAnswer, false);
+            done();
         });
 
         it('should load topic api data', (done) => {

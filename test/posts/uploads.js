@@ -24,6 +24,7 @@ const _recreateFiles = () => {
     // Create stub files for testing
     _filenames.forEach(filename => fs.closeSync(fs.openSync(path.join(nconf.get('upload_path'), 'files', filename), 'w')));
 };
+const { setAnonymous } = require('../../src/categories/isanonfunc');
 
 describe('upload methods', () => {
     let pid;
@@ -411,6 +412,43 @@ describe('post uploads management', () => {
             assert.ifError(err);
             assert.strictEqual(true, Array.isArray(uploads));
             assert.strictEqual(0, uploads.length);
+            done();
+        });
+    });
+    describe('Anonymous Posting', () => {
+        let uid;
+        let cid;
+        before(async () => {
+            uid = await user.create({
+                username: 'anon_user',
+                password: 'securepassword',
+                gdpr_consent: 1,
+            });
+            ({ cid } = await categories.create({
+                name: 'Anonymous Post',
+                description: 'test for anonymous posts',
+            }));
+        });
+        it('should create anonymous post successfully', (done) => {
+            // Assuming the initial post data
+            const post = {
+                user: {
+                    username: 'user1',
+                    displayname: 'User One',
+                },
+                uid: 123,
+                isAnonymous: 'true', // This should trigger the anonymity setting
+            };
+            // Printing topic before calling setAnonymous
+            console.log('Before:', post);
+            // Call the setAnonymous function with the topic
+            setAnonymous(post);
+            // Printing topic after calling setAnonymous
+            console.log('After:', post);
+            // Assertions to check if the topic is set as anonymous
+            assert.strictEqual(post.user.username, 'anon', 'Username should be anon');
+            assert.strictEqual(post.user.displayname, 'anon', 'Display name should be anon');
+            assert.strictEqual(post.uid, -1, 'UID should be -1');
             done();
         });
     });

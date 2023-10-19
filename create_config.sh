@@ -19,6 +19,7 @@ if [[ -z "${REDIS_PASSWORD+x}" ]]; then
   exit 1
 fi
 
+
 if [[ -z "${DEPLOYMENT_URL+x}" ]]; then
   # var is not defined
   echo "Error: DEPLOYMENT_URL is not defined!"

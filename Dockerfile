@@ -18,6 +18,7 @@ RUN npm install && \
 
 COPY --chown=node:node . /usr/src/app
 
+
 ENV NODE_ENV=production \
     daemon=false \
     silent=false

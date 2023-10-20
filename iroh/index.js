@@ -1,3 +1,5 @@
+/* eslint-disable no-eval */
+
 'use strict';
 
 const Iroh = require('iroh');
@@ -7,7 +9,7 @@ function factorial(n) {
   if (n === 0) return 1;
   return n * factorial(n - 1);
 };
-factorial(9);
+factorial(3);
 `);
 
 // function call
@@ -46,4 +48,15 @@ stage.addListener(Iroh.FUNCTION)
             // console.log(e.getSource());
         }
     });
-stage.evalScript();
+
+// program
+stage.addListener(Iroh.PROGRAM)
+    .on('enter', (e) => {
+        console.log(`${' '.repeat(e.indent)}Program`);
+    })
+    .on('leave', (e) => {
+        console.log(`${' '.repeat(e.indent)}Program end`, '->', e.return);
+    });
+
+eval(stage.script);
+

@@ -1,64 +1,52 @@
 /* eslint-disable no-eval */
 
-/* global Iroh */
-
 'use strict';
 
 // const Iroh = require('iroh');
 
-const stage = new Iroh.Stage(`
-function factorial(n) {
-  if (n === 0) return 1;
-  return n * factorial(n - 1);
-};
-factorial(3);
-`);
+function buildCallStack(callStack, indent = 0) {
+    let output = '';
 
-// function call
-stage.addListener(Iroh.CALL)
-    .on('before', (e) => {
-        const external = e.external ? '#external' : '';
-        console.log(`${' '.repeat(e.indent)}call`, e.name, external, '(', e.arguments, ')');
-        // console.log(e.getSource());
-    })
-    .on('after', (e) => {
-        const external = e.external ? '#external' : '';
-        console.log(`${' '.repeat(e.indent)}call`, e.name, 'end', external, '->', [e.return]);
-        // console.log(e.getSource());
-    });
-
-// function
-stage.addListener(Iroh.FUNCTION)
-    .on('enter', (e) => {
-        const sloppy = e.sloppy ? '#sloppy' : '';
-        if (e.sloppy) {
-            console.log(`${' '.repeat(e.indent)}call`, e.name, sloppy, '(', e.arguments, ')');
-            // console.log(e.getSource());
+    const currentCall = callStack.shift();
+    if (currentCall) {
+        output += `${' '.repeat(indent)}call ${currentCall.name} ( [ ${currentCall.args.join(', ')} ] )\n`;
+        if (currentCall.children && currentCall.children.length > 0) {
+            output += buildCallStack(currentCall.children, indent + 2);
         }
-    })
-    .on('leave', (e) => {
-        const sloppy = e.sloppy ? '#sloppy' : '';
-        if (e.sloppy) {
-            console.log(`${' '.repeat(e.indent)}call`, e.name, 'end', sloppy, '->', [undefined]);
-            // console.log(e.getSource());
-        }
-    })
-    .on('return', (e) => {
-        const sloppy = e.sloppy ? '#sloppy' : '';
-        if (e.sloppy) {
-            console.log(`${' '.repeat(e.indent)}call`, e.name, 'end', sloppy, '->', [e.return]);
-            // console.log(e.getSource());
-        }
-    });
+        output += `${' '.repeat(indent)}call ${currentCall.name} end  -> [ ${currentCall.result} ]\n`;
+    }
 
-// program
-stage.addListener(Iroh.PROGRAM)
-    .on('enter', (e) => {
-        console.log(`${' '.repeat(e.indent)}Program`);
-    })
-    .on('leave', (e) => {
-        console.log(`${' '.repeat(e.indent)}Program end`, '->', e.return);
-    });
+    return output;
+}
 
-eval(stage.script);
+// Define a data structure to represent the call stack
+class Call {
+    constructor(name, args) {
+        this.name = name;
+        this.args = args;
+        this.children = [];
+        this.result = null;
+    }
+}
 
+// Simulate a call stack
+const programCall = new Call('Program', []);
+const factorial3Call = new Call('factorial', [3]);
+const factorial2Call = new Call('factorial', [2]);
+const factorial1Call = new Call('factorial', [1]);
+const factorial0Call = new Call('factorial', [0]);
+
+factorial0Call.result = 1;
+factorial1Call.children.push(factorial0Call);
+factorial1Call.result = 1;
+factorial2Call.children.push(factorial1Call);
+factorial2Call.result = 2;
+factorial3Call.children.push(factorial2Call);
+factorial3Call.result = 6;
+programCall.children.push(factorial3Call);
+
+// Build the call stack as a string
+const callStackString = buildCallStack([programCall]);
+
+// Display or use the call stack string as needed
+console.log(callStackString);

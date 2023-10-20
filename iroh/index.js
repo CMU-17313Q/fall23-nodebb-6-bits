@@ -46,7 +46,8 @@ factorial3Call.result = 6;
 programCall.children.push(factorial3Call);
 
 // Build the call stack as a string
-const callStackString = buildCallStack([programCall]);
+buildCallStack([programCall]);
 
-// Display or use the call stack string as needed
-console.log(callStackString);
+// uncomment these two lines to see the output in your terminal
+// const callStackString = buildCallStack([programCall]);
+// console.log(callStackString);

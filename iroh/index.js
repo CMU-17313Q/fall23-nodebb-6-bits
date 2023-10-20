@@ -1,8 +1,10 @@
 /* eslint-disable no-eval */
 
+/* global Iroh */
+
 'use strict';
 
-const Iroh = require('iroh');
+// const Iroh = require('iroh');
 
 const stage = new Iroh.Stage(`
 function factorial(n) {

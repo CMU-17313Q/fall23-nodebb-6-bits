@@ -20,7 +20,17 @@ Career.register = async (req, res) => {
             num_past_internships: userData.num_past_internships,
         };
 
-        userCareerData.prediction = Math.round(Math.random());
+        try {
+            const DeployedURL = 'https://deployed-model-python-azxm6vzqyq-uc.a.run.app/predict';
+            const queryParams = new URLSearchParams(userCareerData);
+            const response = await fetch(`${DeployedURL}?${queryParams}`);
+            const responseData = await response.json();
+            userCareerData.prediction = String(responseData.good_employee);
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'An error occurred while calling the ML microservice' });
+        }
+
         await user.setCareerData(req.uid, userCareerData);
         db.sortedSetAdd('users:career', req.uid, req.uid);
         res.json({});
@@ -29,4 +39,3 @@ Career.register = async (req, res) => {
         helpers.noScriptErrors(req, res, err.message, 400);
     }
 };
-

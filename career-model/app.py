@@ -1,11 +1,11 @@
 from flask import Flask, request
-from predict import predict
+import predict
 app = Flask(__name__)
 
 
 @app.route("/")
-def test():
-    return "<p>works!</p>"
+def testing():
+    return "<p>Testing Passed</p>"
 
 
 @app.route("/predict", methods=["GET"])
@@ -36,7 +36,3 @@ def predict_student():
     prediction_result = predict(student)
     prediction_result['good_employee'] = int(prediction_result['good_employee'])
     return prediction_result
-
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)

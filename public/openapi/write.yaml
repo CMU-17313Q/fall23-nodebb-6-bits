@@ -176,3 +176,4 @@ paths:
     $ref: 'write/files.yaml'
   /files/folder:
     $ref: 'write/files/folder.yaml'
+      $ref: 'write/files/folder.yaml'

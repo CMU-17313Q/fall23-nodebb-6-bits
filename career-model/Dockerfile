@@ -1,6 +1,6 @@
 FROM python:3.11
 
-WORKDIR /python-microservice
+WORKDIR /career-model
 
 COPY requirements.txt .
 
@@ -10,11 +10,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 
+EXPOSE 8080
 
-EXPOSE 80
-
-ENV PORT 80
-
+ENV PORT 8080
 ENV HOSTNAME "0.0.0.0"
-
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "80"]
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8080"]

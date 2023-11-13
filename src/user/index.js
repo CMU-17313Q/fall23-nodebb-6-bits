@@ -40,6 +40,8 @@ require('./info')(User);
 require('./online')(User);
 require('./blocks')(User);
 require('./uploads')(User);
+require('./career')(User);
+
 
 User.exists = async function (uids) {
     return await (
